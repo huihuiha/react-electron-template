@@ -9,11 +9,15 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { resolveHtmlPath } from './utils/index';
+
+import './utils/shell';
+
+import './utils/ipc';
 
 class AppUpdater {
   constructor() {
@@ -24,12 +28,6 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
-});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -73,7 +71,10 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
+    // 去掉标题
+    frame: false,
     icon: getAssetPath('icon.png'),
+    // 加载预脚本
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
