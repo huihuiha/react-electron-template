@@ -1,5 +1,5 @@
 /**
- * 执行shell脚本的语言
+ * 执行pythonshell脚本的语言
  */
 
 import { Options, PythonShell } from 'python-shell';
