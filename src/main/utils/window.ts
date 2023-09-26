@@ -25,6 +25,7 @@ export const createWindow = async () => {
     // 去掉标题
     frame: false,
     icon: getAssetPath('icon.png'),
+    resizable: false,
     // 加载预脚本
     webPreferences: {
       preload: app.isPackaged
