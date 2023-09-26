@@ -1,4 +1,4 @@
-export type SendItem<msg, res extends unknown = any> = {
+export type SendItem<msg extends any = unknown, res extends unknown = any> = {
   sendMsg: msg;
   return: res;
 };

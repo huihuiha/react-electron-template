@@ -1,8 +1,6 @@
 import { app } from 'electron';
 import { createWindow } from './utils/window';
-
 import './utils/shell';
-import './utils/ipc';
 
 app
   .whenReady()
@@ -12,6 +10,8 @@ app
     app.on('activate', () => {
       if (mainWindow === null) createWindow();
     });
+
+    import('./utils/event');
   })
   .catch(console.log);
 

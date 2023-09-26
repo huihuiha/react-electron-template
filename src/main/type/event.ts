@@ -4,6 +4,7 @@ import { OnItem, SendItem } from './ipc';
 export type SendMap = {
   message: SendItem<string>;
   test: SendItem<number>;
+  fullScreen: SendItem;
 };
 
 // 渲染进程监听主进程的消息记录

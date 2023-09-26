@@ -20,8 +20,8 @@ export const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 450,
+    height: 600,
     // 去掉标题
     frame: false,
     icon: getAssetPath('icon.png'),
