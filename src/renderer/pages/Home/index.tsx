@@ -10,8 +10,6 @@ const Home = () => {
   };
 
   const send = async () => {
-    const a = await window.ipc.invoke('message', 'hello from renderer');
-
     window.ipc.send('message', '123');
     window.ipc.send('test', 123);
   };

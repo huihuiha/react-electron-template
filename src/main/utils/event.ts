@@ -1,6 +1,9 @@
 import { on, handle } from './ipc';
 import { BrowserWindow } from 'electron';
 
+/**
+ * 窗口最大化
+ */
 on('maximize', (event) => {
   const win = BrowserWindow.fromWebContents(event.sender)!;
   win.setPosition(0, 0);
@@ -12,6 +15,13 @@ on('maximize', (event) => {
   }
 });
 
+/**
+ * 关闭窗口
+ */
 on('closeWindow', (event) => {
   BrowserWindow.fromWebContents(event.sender)?.close();
+});
+
+on('message', (event, args) => {
+  console.log(args, '======');
 });
