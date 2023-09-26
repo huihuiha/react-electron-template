@@ -22,7 +22,10 @@ export const createWindow = async () => {
     show: false,
     width: 450,
     height: 600,
+    minHeight: 600,
+    minWidth: 450,
     frame: true,
+    title: '',
     icon: getAssetPath('icon.png'),
     resizable: false,
     // 加载预脚本
