@@ -1,41 +1,7 @@
 import { app, BrowserWindow, shell } from 'electron';
 import path from 'path';
 import { resolveHtmlPath } from '.';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-
-class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
-
-if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support');
-  sourceMapSupport.install();
-}
-
-const isDebug =
-  process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
-
-if (isDebug) {
-  require('electron-debug')();
-}
-
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS'];
-
-  return installer
-    .default(
-      extensions.map((name) => installer[name]),
-      forceDownload,
-    )
-    .catch(console.log);
-};
+import { AppUpdater, installExtensions, isDebug } from './install';
 
 export const createWindow = async () => {
   let mainWindow: BrowserWindow | null = null;
@@ -84,13 +50,11 @@ export const createWindow = async () => {
     mainWindow = null;
   });
 
-  // Open urls in the user's browser
+  // 设置打开的url在浏览器中打开
   mainWindow.webContents.setWindowOpenHandler((edata) => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
 
-  // Remove this if your app does not use auto updates
-  // eslint-disable-next-line
   new AppUpdater();
 };

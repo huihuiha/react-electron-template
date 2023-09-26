@@ -4,7 +4,7 @@ export type Channels = string;
 
 const electronHandler = {
   ipcRenderer: {
-    sendMessage(channel: Channels, ...args: unknown[]) {
+    send(channel: Channels, ...args: unknown[]) {
       ipcRenderer.send(channel, ...args);
     },
     on(channel: Channels, func: (...args: unknown[]) => void) {
@@ -22,6 +22,7 @@ const electronHandler = {
   },
 };
 
+// 预加载暴漏给渲染进程的方法
 contextBridge.exposeInMainWorld('electron', electronHandler);
 
 export type ElectronHandler = typeof electronHandler;
