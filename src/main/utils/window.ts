@@ -22,8 +22,7 @@ export const createWindow = async () => {
     show: false,
     width: 450,
     height: 600,
-    // 去掉标题
-    frame: false,
+    frame: true,
     icon: getAssetPath('icon.png'),
     resizable: false,
     // 加载预脚本
@@ -58,4 +57,6 @@ export const createWindow = async () => {
   });
 
   new AppUpdater();
+
+  return mainWindow;
 };

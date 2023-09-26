@@ -5,6 +5,7 @@ export type SendMap = {
   message: SendItem<string>;
   test: SendItem<number>;
   maximize: SendItem;
+  closeWindow: SendItem;
 };
 
 // 渲染进程监听主进程的消息记录

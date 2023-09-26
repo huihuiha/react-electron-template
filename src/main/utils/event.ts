@@ -6,6 +6,9 @@ on('message', (event, args) => {});
 handle('message', (event, args) => {});
 
 on('maximize', (event) => {
-  console.log('=====');
   BrowserWindow.fromWebContents(event.sender)?.maximize();
+});
+
+on('closeWindow', (event) => {
+  BrowserWindow.fromWebContents(event.sender)?.close();
 });

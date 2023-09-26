@@ -4,11 +4,15 @@ import './utils/shell';
 
 app
   .whenReady()
-  .then(() => {
-    const mainWindow = createWindow();
+  .then(async () => {
+    const mainWindow = await createWindow();
 
     app.on('activate', () => {
-      if (mainWindow === null) createWindow();
+      if (mainWindow === null) {
+        createWindow();
+      } else {
+        mainWindow.show();
+      }
     });
 
     // 处理主进程监听到的事件
