@@ -1,5 +1,4 @@
 import { app } from 'electron';
-
 import { createWindow } from './utils/window';
 
 import './utils/shell';

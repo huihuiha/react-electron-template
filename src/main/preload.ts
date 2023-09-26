@@ -1,28 +1,53 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
+import { SendChannels, SendMap, OnChannels, OnMap } from './type/ipc';
 
-export type Channels = string;
+/**
+ * ipc 通信模块
+ */
+const ipcRendererHandle = {
+  send<Name extends SendChannels>(
+    channel: Name,
+    args: SendMap[Name]['sendMsg'],
+  ) {
+    ipcRenderer.send(channel, args);
+  },
 
-const electronHandler = {
-  ipcRenderer: {
-    send(channel: Channels, ...args: unknown[]) {
-      ipcRenderer.send(channel, ...args);
-    },
-    on(channel: Channels, func: (...args: unknown[]) => void) {
-      const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
-        func(...args);
-      ipcRenderer.on(channel, subscription);
+  // 双信通信
+  invoke<Name extends SendChannels>(
+    channel: Name,
+    args: SendMap[Name]['sendMsg'],
+  ): Promise<SendMap[Name]['return']> {
+    return ipcRenderer.invoke(channel, args) as Promise<
+      SendMap[Name]['return']
+    >;
+  },
 
-      return () => {
-        ipcRenderer.removeListener(channel, subscription);
-      };
-    },
-    once(channel: Channels, func: (...args: unknown[]) => void) {
-      ipcRenderer.once(channel, (_event, ...args) => func(...args));
-    },
+  on<T extends OnChannels>(
+    channel: T,
+    func: (args: OnMap[T]['receiveArg']) => void,
+  ) {
+    const subscription = (
+      _event: IpcRendererEvent,
+      args: OnMap[OnChannels]['receiveArg'],
+    ) => func(args);
+    ipcRenderer.on(channel, subscription);
+
+    return () => {
+      ipcRenderer.removeListener(channel, subscription);
+    };
+  },
+
+  once<T extends OnChannels>(
+    channel: T,
+    func: (args: OnMap[T]['receiveArg']) => void,
+  ) {
+    ipcRenderer.once(channel, (_event, args: OnMap[T]['receiveArg']) =>
+      func(args),
+    );
   },
 };
 
-// 预加载暴漏给渲染进程的方法
-contextBridge.exposeInMainWorld('electron', electronHandler);
+// 通信模块
+contextBridge.exposeInMainWorld('ipc', ipcRendererHandle);
 
-export type ElectronHandler = typeof electronHandler;
+export type IpcRender = typeof ipcRendererHandle;

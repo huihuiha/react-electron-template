@@ -1,11 +1,20 @@
-import { ipcMain } from 'electron';
+import { SendChannels, SendMap } from '@main/type/ipc';
+import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron';
 
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
-});
+export function on<T extends SendChannels>(
+  channel: T,
+  func: (event: IpcMainEvent, args: SendMap[T]['sendMsg']) => void,
+) {
+  ipcMain.on(channel, (event, arg) => {
+    return func(event, arg);
+  });
+}
 
-ipcMain.on('message', async (event, arg) => {
-  console.log(arg);
-});
+export function handle<T extends SendChannels>(
+  channel: T,
+  func: (event: IpcMainInvokeEvent, args: SendMap[T]['sendMsg']) => void,
+) {
+  ipcMain.handle(channel, (event, arg) => {
+    return func(event, arg);
+  });
+}
