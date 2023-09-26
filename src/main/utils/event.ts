@@ -1,4 +1,4 @@
-import { on, handle } from './ipc';
+import { on } from './ipc';
 import { BrowserWindow } from 'electron';
 
 /**
