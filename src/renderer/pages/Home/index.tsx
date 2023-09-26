@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,9 +32,15 @@ const Home = () => {
 
   return (
     <>
-      <button onClick={handleClick}>跳转到登录页</button>
-      <button onClick={send}>向主进程发送消息</button>
-      <button onClick={handleFull}>窗口全屏</button>
+      <Button type="primary" onClick={handleClick}>
+        跳转到登录页
+      </Button>
+      <Button type="primary" onClick={send}>
+        向主进程发送消息
+      </Button>
+      <Button type="primary" onClick={handleFull}>
+        窗口全屏
+      </Button>
     </>
   );
 };
