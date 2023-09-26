@@ -1,4 +1,5 @@
 import { Button } from 'antd';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -7,6 +8,15 @@ const Login = () => {
   const handleBack = () => {
     navigate(-1);
   };
+
+  const isLogin = false;
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate('/home');
+      window.ipc.send('maximize');
+    }
+  }, []);
 
   return (
     <div>
