@@ -1,11 +1,11 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-import { SendChannels, SendMap, OnChannels, OnMap } from './type/ipc';
+import { SendMap, OnMap } from './type/event';
 
 /**
  * ipc 通信模块
  */
 const ipcRendererHandle = {
-  send<Name extends SendChannels>(
+  send<Name extends keyof SendMap>(
     channel: Name,
     args: SendMap[Name]['sendMsg'],
   ) {
@@ -13,7 +13,7 @@ const ipcRendererHandle = {
   },
 
   // 双信通信
-  invoke<Name extends SendChannels>(
+  invoke<Name extends keyof SendMap>(
     channel: Name,
     args: SendMap[Name]['sendMsg'],
   ): Promise<SendMap[Name]['return']> {
@@ -22,13 +22,13 @@ const ipcRendererHandle = {
     >;
   },
 
-  on<T extends OnChannels>(
+  on<T extends keyof OnMap>(
     channel: T,
     func: (args: OnMap[T]['receiveArg']) => void,
   ) {
     const subscription = (
       _event: IpcRendererEvent,
-      args: OnMap[OnChannels]['receiveArg'],
+      args: OnMap[T]['receiveArg'],
     ) => func(args);
     ipcRenderer.on(channel, subscription);
 
@@ -37,7 +37,7 @@ const ipcRendererHandle = {
     };
   },
 
-  once<T extends OnChannels>(
+  once<T extends keyof OnMap>(
     channel: T,
     func: (args: OnMap[T]['receiveArg']) => void,
   ) {

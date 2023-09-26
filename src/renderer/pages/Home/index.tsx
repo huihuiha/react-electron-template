@@ -12,10 +12,15 @@ const Home = () => {
     const a = await window.ipc.invoke('message', 'hello from renderer');
 
     window.ipc.send('message', '123');
+    window.ipc.send('test', 123);
   };
 
   useEffect(() => {
     window.ipc.on('message', (message) => {
+      console.log(message);
+    });
+
+    window.ipc.on('test', (message) => {
       console.log(message);
     });
   }, []);
