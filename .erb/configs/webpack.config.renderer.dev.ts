@@ -207,6 +207,18 @@ const configuration: webpack.Configuration = {
         .on('error', (spawnError) => console.error(spawnError));
       return middlewares;
     },
+    proxy: {
+      '/api': {
+        target: 'https://vmlive-fat.test.seewo.com',
+        changeOrigin: true,
+        onProxyReq(proxyReq, req, res) {
+          console.log('Proxy Request:', req.method, req.url);
+        },
+        onProxyRes(proxyRes, req, res) {
+          console.log('Proxy Response:', res.statusCode);
+        },
+      },
+    },
   },
 };
 
