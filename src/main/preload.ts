@@ -7,7 +7,7 @@ import { SendMap, OnMap } from './type/event';
 const ipcRendererHandle = {
   send<Name extends keyof SendMap>(
     channel: Name,
-    args: SendMap[Name]['sendMsg'],
+    args?: SendMap[Name]['sendMsg'],
   ) {
     ipcRenderer.send(channel, args);
   },

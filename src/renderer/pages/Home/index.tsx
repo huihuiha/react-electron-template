@@ -15,6 +15,10 @@ const Home = () => {
     window.ipc.send('test', 123);
   };
 
+  const handleFull = () => {
+    window.ipc.send('maximize');
+  };
+
   useEffect(() => {
     window.ipc.on('message', (message) => {
       console.log(message);
@@ -29,6 +33,7 @@ const Home = () => {
     <>
       <button onClick={handleClick}>跳转到登录页</button>
       <button onClick={send}>向主进程发送消息</button>
+      <button onClick={handleFull}>窗口全屏</button>
     </>
   );
 };

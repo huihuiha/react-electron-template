@@ -11,6 +11,7 @@ app
       if (mainWindow === null) createWindow();
     });
 
+    // 处理主进程监听到的事件
     import('./utils/event');
   })
   .catch(console.log);
