@@ -7,12 +7,14 @@ import taskStore from '@renderer/store/task';
 import modelStore from '@renderer/store/model';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './index.less';
 
 const EditPage = () => {
+  const params = useParams();
+
   useEffect(() => {
-    const showId = +getSearchParam('showId');
-    taskStore.setShowId(showId);
+    taskStore.setShowId(params.showId as unknown as number);
     taskStore.getTaskDetail();
     modelStore.getModelList();
   }, []);

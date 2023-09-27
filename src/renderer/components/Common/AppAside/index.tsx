@@ -6,8 +6,17 @@ import './index.less';
 import { IRoute } from '@renderer/type/login';
 import { MenuType } from '@renderer/type/home';
 
-const routeConfig = require('../../../router/index');
-const appRoutes = (routeConfig.appRoutes || []) as IRoute[];
+// const routeConfig = require('../../../router/index');
+// const appRoutes = (routeConfig.appRoutes || []) as IRoute[];
+
+const appRoutes: IRoute[] = [
+  {
+    path: '/app/home',
+    name: '首页',
+    component: '@renderer/pages/Home',
+    menuType: MenuType.sideMenu,
+  },
+];
 
 const AppAside = () => {
   const navigate = useNavigate();

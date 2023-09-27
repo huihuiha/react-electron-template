@@ -9,7 +9,7 @@ interface RespData<T = any> {
 }
 
 const service = axios.create({
-  timeout: 5000,
+  timeout: 10000,
 });
 
 service.interceptors.request.use((config) => {
@@ -20,10 +20,11 @@ service.interceptors.response.use(
   (response) => {
     // 如果未登录，重定向到登录页面   TODO：重新刷新token比强制登录体验会更好
     if (+response.data.code === 401) {
-      // message.error('您的登录状态已过期或失效，请重新登录。');
-      // setTimeout(() => {
-      //   window.location.href = `/login`;
-      // }, 1000);
+      message.error('您的登录状态已过期或失效，请重新登录。');
+      setTimeout(() => {
+        // TODO:
+        // window.location.href = `/login`;
+      }, 1000);
     }
     return response;
   },

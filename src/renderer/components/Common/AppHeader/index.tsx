@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react';
 import './index.less';
-import ImageLogo from '@images/home/logo.png';
+import ImageLogo from '@renderer/common/images/home/logo.png';
 import { Popover, message } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import { getGlobalUserInfo } from '@renderer/utils/index';
 import { logout } from '@renderer/services/login';
-import defaultAvatar from '@images/home/default_avatar.png';
+import defaultAvatar from '@renderer/common/images/home/default_avatar.png';
 
 const AppHeader = () => {
   const [userName, setUserName] = useState('');

@@ -13,7 +13,7 @@ const AppPage: React.FC<
   return (
     <div className="app-page" style={props.pageStyle}>
       <div className="app-page-header">
-        <h1 className="app-page-title">{curRoute!.name}</h1>
+        <h1 className="app-page-title">首页</h1>
         {props.operation}
       </div>
       {props.children}
