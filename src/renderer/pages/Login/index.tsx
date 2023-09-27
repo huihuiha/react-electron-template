@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate('/app');
+      navigate('/app/edit');
       window.ipc.send('maximize');
     }
   }, []);
