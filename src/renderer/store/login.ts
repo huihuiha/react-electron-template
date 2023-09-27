@@ -121,7 +121,8 @@ class LoginStore {
           name: module.name,
           userId: module.userId,
         });
-        window.location.href = '/';
+
+        return true;
       } else {
         this.setSubmitErrorText('手机号或者验证码错误');
       }

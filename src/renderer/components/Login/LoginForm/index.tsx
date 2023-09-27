@@ -5,6 +5,7 @@ import { GeetestResult } from '@renderer/type/login';
 import './style.less';
 import { Button, Form, Input, Modal } from 'antd';
 import ReactGeetest from '@renderer/components/Common/ReactGeetest';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   submitType: string;
@@ -13,6 +14,8 @@ interface IProps {
 const PREV_PHONE = 'vmlive:prev_login_phone';
 
 const LoginForm: React.FC<IProps> = ({ submitType }) => {
+  const navigate = useNavigate();
+
   // 登录表单 --start
   const [codeDisabled, setCodeDisabled] = useState(false);
   const [hasSended, setHasSended] = useState(false); //是否获取过验证码
@@ -80,11 +83,15 @@ const LoginForm: React.FC<IProps> = ({ submitType }) => {
     }
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (submitDisabled) return;
     if (!validPhoneNumber()) return;
     if (submitType === 'login') {
-      loginStore.handleLogin();
+      const res = await loginStore.handleLogin();
+      if (res) {
+        window.ipc.send('maximize');
+        navigate('/app/home');
+      }
     } else {
       console.log('binding');
     }
