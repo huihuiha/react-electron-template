@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, session } from 'electron';
 import { createWindow } from './utils/window';
 import './utils/shell';
 
@@ -13,6 +13,17 @@ app
       } else {
         mainWindow.show();
       }
+    });
+
+    // 设置 CSP
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          'Content-Security-Policy':
+            "script-src 'self' https://static.geetest.com/static/js/gt.0.4.9.js *",
+        },
+      });
     });
 
     // 处理主进程监听到的事件
