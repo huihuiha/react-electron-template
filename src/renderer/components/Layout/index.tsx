@@ -26,10 +26,10 @@ const Layout = () => {
       <Button type="primary" onClick={handleClick}>
         跳转到登录页
       </Button>
-      <Button type="primary" onClick={() => navigate('/group')}>
+      <Button type="primary" onClick={() => navigate('/app/group')}>
         跳转group
       </Button>
-      <Button type="primary" onClick={() => navigate('/home')}>
+      <Button type="primary" onClick={() => navigate('/app/home')}>
         跳转home
       </Button>
       <Button type="primary" onClick={send}>

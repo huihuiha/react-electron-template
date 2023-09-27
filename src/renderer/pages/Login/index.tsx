@@ -9,11 +9,11 @@ const Login = () => {
     navigate(-1);
   };
 
-  const isLogin = false;
+  const isLogin = true;
 
   useEffect(() => {
     if (isLogin) {
-      navigate('/home');
+      navigate('/app');
       window.ipc.send('maximize');
     }
   }, []);

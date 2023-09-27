@@ -11,9 +11,9 @@ export default function App() {
       <Router>
         <Routes>
           <Route index path="/" element={<Login />} />
-          <Route path="/" element={<Layout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/group" element={<Group />} />
+          <Route path="/app" element={<Layout />}>
+            <Route path="/app/group" element={<Group />} />
+            <Route path="/app/home" element={<Home />} />
           </Route>
         </Routes>
       </Router>
