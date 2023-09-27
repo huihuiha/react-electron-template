@@ -1,0 +1,43 @@
+.app-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  height: 100%;
+  padding: 26px 20px 0 20px;
+  box-sizing: border-box;
+  border-right: 1px solid #eeeef2;
+
+  .app-aside-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 167px;
+    height: 36px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+
+    .img {
+      margin-right: 6px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .name {
+      width: calc(100% - 26px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:hover,
+    &.active {
+      background-color: #eeeef2;
+    }
+    & + .app-aside-item {
+      margin-top: 24px;
+    }
+  }
+}

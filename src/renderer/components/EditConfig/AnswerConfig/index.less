@@ -1,0 +1,45 @@
+.edit-answer-config {
+  .ml-10 {
+    margin-left: 10px;
+  }
+  .question-icon {
+    margin: 0 4px;
+    cursor: pointer;
+  }
+}
+
+.edit-qa-del-pop {
+  width: 200px !important;
+}
+
+.edit-qa-item-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 14px;
+  .qa-item {
+    width: 100%;
+    height: 56px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .qa-item-text {
+      margin-left: 8px;
+      margin-right: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      white-space: nowrap;
+    }
+    .del-icon {
+      opacity: 0;
+      cursor: pointer;
+    }
+    &:hover {
+      .del-icon {
+        opacity: 1;
+      }
+    }
+  }
+}

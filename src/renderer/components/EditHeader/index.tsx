@@ -3,10 +3,11 @@ import { Button, Input, InputRef, message } from 'antd';
 import { observer } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
 import taskStore from '@renderer/store/task';
-import './index.less';
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { ShowStatus, LiveStatus, ConfigBlockType } from '@renderer/type/task';
 import { checkFileName } from '@renderer/utils';
+import editSvg from '@renderer/common/images/edit/edit.svg';
+import './index.less';
 
 const EditHeader = () => {
   const navigate = useNavigate();
@@ -99,7 +100,11 @@ const EditHeader = () => {
         ) : (
           <>
             <div className="view-text">{title}</div>
-            <div className="edit-icon" onClick={handleClickTitle}></div>
+            <img
+              src={editSvg}
+              className="edit-icon"
+              onClick={handleClickTitle}
+            ></img>
           </>
         )}
       </div>

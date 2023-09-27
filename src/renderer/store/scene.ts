@@ -13,7 +13,6 @@ import { deletePlayAudio } from '@renderer/services/play';
 import { updateModule } from '@renderer/services/model';
 import { ModuleStyle } from '@renderer/type/task';
 import { ModelInfo } from '@renderer/type/model';
-import { cloneDeep } from 'lodash-es';
 
 /**
  * 场景相关配置

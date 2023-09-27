@@ -1,0 +1,125 @@
+.play-item {
+  font-size: 14px;
+  border: 1px solid #d9d9d9;
+  background: rgba(222, 228, 244, 0.5);
+  border-bottom: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.88);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 16px;
+
+  &.back-item {
+    margin-top: 0px;
+    background-color: #fff;
+    border-top: none;
+
+    animation-name: show;
+    animation-duration: 0.3s;
+  }
+
+  .play-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .num {
+      color: #3d3d3d;
+      font-size: 12px;
+    }
+
+    .delete {
+      width: 14px;
+      height: 14px;
+      // background-image: url('@images/edit/delete.svg');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      cursor: pointer;
+    }
+  }
+
+  .play-content {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left-wrap {
+      display: flex;
+      flex-direction: column;
+
+      .audio-wrap {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+
+        .play-audio {
+          margin-right: 3px;
+          width: 18px;
+          height: 18px;
+          // background-image: url('@images/edit/play.svg');
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          cursor: pointer;
+
+          &.playing {
+            // background-image: url('@images/edit/pause.svg');
+          }
+        }
+
+        .play-time {
+          margin-top: 1px;
+          font-size: 12px;
+          color: #666666;
+        }
+      }
+
+      .play-msg {
+        .play-title {
+          max-width: 350px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          overflow: hidden;
+          font-size: 16px;
+        }
+
+        .player {
+          margin-top: 3px;
+
+          .title {
+            margin-right: 4px;
+          }
+
+          .item {
+            color: #999;
+          }
+        }
+      }
+    }
+
+    .middle-wrap {
+      .title {
+        margin-right: 4px;
+      }
+    }
+
+    .play-control {
+      .use {
+        display: flex;
+        align-items: center;
+
+        .title {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .play-back {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+  }
+}

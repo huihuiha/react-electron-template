@@ -1,0 +1,60 @@
+.login-form-wrap {
+  .phone-input-wrap {
+    position: relative;
+    .phone-error {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: normal;
+      line-height: normal;
+      text-align: center;
+      color: #cf2f2f;
+    }
+    .custom-ant-input {
+      padding-right: 110px;
+      border: 1px solid #cf2f2f;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+  .sumit-btn-wrap {
+    position: relative;
+    .submit-error {
+      position: absolute;
+      left: 0;
+      top: -26px;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: normal;
+      color: #cf2f2f;
+      margin-bottom: 10px;
+    }
+  }
+
+  // 覆盖antd样式
+  .ant-input,
+  .ant-btn {
+    height: 50px !important;
+    border-radius: 4px !important;
+  }
+  .ant-input {
+    padding-left: 16px !important;
+  }
+  .ant-btn {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ant-btn[disabled] {
+    border-radius: 4px;
+    background: #d8d8d8;
+    font-weight: normal;
+    line-height: normal;
+    text-align: center;
+    color: #666666;
+  }
+}

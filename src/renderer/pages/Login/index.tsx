@@ -1,27 +1,12 @@
-import { Button } from 'antd';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './index.less';
+import LoginBlock from '@renderer/components/Login/LoginBlock/';
 
 const Login = () => {
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
-  const isLogin = true;
-
-  useEffect(() => {
-    if (isLogin) {
-      navigate('/app/edit');
-      window.ipc.send('maximize');
-    }
-  }, []);
-
   return (
-    <div>
-      login
-      <Button onClick={handleBack}>返回</Button>
+    <div className="login-page">
+      <div className="login-container">
+        <LoginBlock></LoginBlock>
+      </div>
     </div>
   );
 };
