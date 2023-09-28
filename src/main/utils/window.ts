@@ -3,6 +3,9 @@ import path from 'path';
 import { resolveHtmlPath } from '.';
 import { AppUpdater, installExtensions, isDebug } from './install';
 
+export const width = 450;
+export const height = 600;
+
 export const createWindow = async () => {
   let mainWindow: BrowserWindow | null = null;
 
@@ -20,10 +23,10 @@ export const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 450,
-    height: 600,
-    minHeight: 600,
-    minWidth: 450,
+    width: width,
+    height: height,
+    minHeight: height,
+    minWidth: width,
     frame: true,
     title: '',
     icon: getAssetPath('icon.png'),

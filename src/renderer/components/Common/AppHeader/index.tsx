@@ -7,15 +7,19 @@ import { useState, useEffect } from 'react';
 import { getGlobalUserInfo } from '@renderer/utils/index';
 import { logout } from '@renderer/services/login';
 import defaultAvatar from '@renderer/common/images/home/default_avatar.png';
+import { useNavigate } from 'react-router-dom';
 
 const AppHeader = () => {
   const [userName, setUserName] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       const { code, msg } = await logout();
       if (code == 200) {
-        window.location.href = '/login';
+        navigate('/');
+        window.ipc.send('initWindow');
       } else {
         message.error(msg || '退出失败');
       }
