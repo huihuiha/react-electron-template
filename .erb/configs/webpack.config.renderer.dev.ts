@@ -209,7 +209,7 @@ const configuration: webpack.Configuration = {
     },
     proxy: {
       '/api': {
-        target: 'https://vmlive-fat.test.seewo.com',
+        target: 'https://vmlive.test.seewo.com',
         changeOrigin: true,
         onProxyReq(proxyReq, req, res) {
           console.log('Proxy Request:', req.method, req.url);

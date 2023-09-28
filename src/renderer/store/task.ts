@@ -161,7 +161,7 @@ class TaskStore {
           keywordList: item.keywordList ?? [],
         }));
 
-        sceneStore.init(sceneList || []);
+        sceneStore.init(sceneList || [], this.showId);
       });
     }
   }
@@ -179,8 +179,8 @@ class TaskStore {
    */
   async startLive() {
     try {
-      const { module, code } = await pushStream({ showId: this.showId });
-      if (code === 200 && module) {
+      const { code } = await pushStream({ showId: this.showId });
+      if (code === 200) {
         runInAction(() => {
           this.liveStatus = LiveStatus.StartGenerating;
           message.success('创建成功');
