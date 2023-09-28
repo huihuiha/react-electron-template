@@ -15,16 +15,6 @@ app
       }
     });
 
-    // 设置 CSP
-    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-      callback({
-        responseHeaders: {
-          ...details.responseHeaders,
-          'Content-Security-Policy':
-            'script-src https://static.geetest.com/static/js/gt.0.4.9.js *',
-        },
-      });
-    });
 
     // 处理主进程监听到的事件
     import('./utils/event');
