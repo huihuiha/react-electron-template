@@ -9,6 +9,7 @@ import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './index.less';
+import scene from '@renderer/store/scene';
 
 const EditPage = () => {
   const params = useParams();
@@ -17,6 +18,11 @@ const EditPage = () => {
     taskStore.setShowId(params.showId as unknown as number);
     taskStore.getTaskDetail();
     modelStore.getModelList();
+
+    return () => {
+      taskStore.reset();
+      scene.reset();
+    };
   }, []);
 
   return (

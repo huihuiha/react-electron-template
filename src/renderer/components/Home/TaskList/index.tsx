@@ -15,7 +15,7 @@ const TaskList = () => {
   const navigate = useNavigate();
 
   const handleEditTask = (item: ShowInfo) => {
-    navigate(`/app/edit?showId=${item.id}`);
+    navigate(`/app/edit/${item.id}`);
   };
 
   useEffect(() => {

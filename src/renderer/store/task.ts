@@ -161,7 +161,7 @@ class TaskStore {
           keywordList: item.keywordList ?? [],
         }));
 
-        sceneStore.init(sceneList || []);
+        sceneStore.init(sceneList || [], this.showId);
       });
     }
   }
@@ -179,8 +179,8 @@ class TaskStore {
    */
   async startLive() {
     try {
-      const { module, code } = await pushStream({ showId: this.showId });
-      if (code === 200 && module) {
+      const { code } = await pushStream({ showId: this.showId });
+      if (code === 200) {
         runInAction(() => {
           this.liveStatus = LiveStatus.StartGenerating;
           message.success('创建成功');
@@ -317,6 +317,22 @@ class TaskStore {
       message.error('网络异常');
     }
   }
+
+  reset = () => {
+    this._debug_id = -1;
+    this.curTab = ConfigBlockType.playList;
+
+    this.showId = -1;
+    this.title = '';
+    this.liveRoomUrl = '';
+    this.livePlatform = undefined;
+    this.showStatus = ShowStatus.Draft;
+    this.liveStatus = LiveStatus.NO_START;
+    this.liveStreamUrl = '';
+
+    this.qaForm = DEFAULT_QA_FORM;
+    this.interactionList = [];
+  };
 }
 
 export default new TaskStore();

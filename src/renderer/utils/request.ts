@@ -9,7 +9,7 @@ interface RespData<T = any> {
 }
 
 const service = axios.create({
-  timeout: 10000,
+  // timeout: 10000,
 });
 
 service.interceptors.request.use((config) => {

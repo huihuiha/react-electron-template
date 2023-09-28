@@ -9,6 +9,7 @@ import { checkFileName } from '@renderer/utils';
 import { useInterval } from 'ahooks';
 import './index.less';
 import { getShowConfig } from '@renderer/services/task';
+import scene from '@renderer/store/scene';
 
 const EditHeader = () => {
   const showStatus = taskStore.showStatus;
@@ -74,6 +75,9 @@ const EditHeader = () => {
   };
 
   const handleGenerate = () => {
+    if (!scene.curSceneData.sortAudioList) {
+      return message.error('请上传播放音频');
+    }
     taskStore.submitCompose();
   };
 
