@@ -96,8 +96,6 @@
     }
   },
   "dependencies": {
-    "@types/lodash-es": "^4.17.9",
-    "@types/react-beautiful-dnd": "^13.1.4",
     "ahooks": "^3.7.8",
     "antd": "^5.9.3",
     "axios": "^1.5.0",
@@ -116,6 +114,8 @@
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.9",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@electron/notarize": "^2.1.0",
     "@electron/rebuild": "^3.3.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
