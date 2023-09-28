@@ -42,6 +42,7 @@ const Geetest: React.FC<IProps> = ({ onSubmit }) => {
         offline: !config.success,
         new_captcha: true,
         product: config.product,
+        https: true,
         timeout: config.timeout || 3000,
       },
       function (captcha: any) {
