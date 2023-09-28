@@ -13,6 +13,9 @@ import { savePlayAudio } from '@renderer/services/play';
 import AudioPlayer, { IMethods } from '@renderer/components/Common/AudioPlayer';
 import { formatTime } from '@renderer/utils';
 
+import playIcon from '@renderer/common/images/edit/play.svg';
+import pauseIcon from '@renderer/common/images/edit/pause.svg';
+
 type IPlayItemInner = {
   item: ShowPlayAudioInfo | PlayAudioInfo;
   /**
@@ -147,11 +150,12 @@ const Item: React.FC<IPlayItemInner> = ({
           </div>
 
           <div className="audio-wrap" onClick={handleAudioPlay}>
-            <div
-              className={cls('play-audio', {
-                playing: audioPlayStatus === AudioStatus.Playing,
-              })}
-            ></div>
+            <img
+              src={
+                audioPlayStatus === AudioStatus.Playing ? pauseIcon : playIcon
+              }
+              className="play-audio"
+            ></img>
             <div className="play-time">
               {formatTime(audioCurTime)} / {formatTime(audioTime)}
             </div>
