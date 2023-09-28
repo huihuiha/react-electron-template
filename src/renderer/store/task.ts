@@ -151,7 +151,10 @@ class TaskStore {
           (livePlatform as number) === 0 ? undefined : livePlatform;
         this.showStatus = showStatus;
         this.liveStatus = liveStatus;
-        this.liveStreamUrl = liveStreamUrl;
+
+        if (liveStatus === LiveStatus.Starting) {
+          this.liveStreamUrl = liveStreamUrl;
+        }
 
         this.interactionList = (interactionList || []).map((item) => ({
           ...item,
@@ -163,6 +166,14 @@ class TaskStore {
     }
   }
 
+  setLiveStatus(status: LiveStatus) {
+    this.liveStatus = status;
+  }
+
+  setLiveStreamUrl(url: string) {
+    this.liveStreamUrl = url;
+  }
+
   /**
    * 推流
    */
@@ -171,8 +182,8 @@ class TaskStore {
       const { module, code } = await pushStream({ showId: this.showId });
       if (code === 200 && module) {
         runInAction(() => {
-          this.liveStreamUrl = module;
-          this.liveStatus = LiveStatus.Starting;
+          this.liveStatus = LiveStatus.StartGenerating;
+          message.success('创建成功');
         });
       } else {
         message.error('推流失败');
@@ -191,6 +202,7 @@ class TaskStore {
       if (code === 200 && module) {
         runInAction(() => {
           this.liveStatus = LiveStatus.NO_START;
+          this.liveStreamUrl = '';
         });
       }
     } catch (e) {
@@ -242,6 +254,8 @@ class TaskStore {
       if (code === 200) {
         runInAction(() => {
           this.showStatus = ShowStatus.Done;
+
+          message.success('生成成功');
         });
       } else {
         message.error('生成失败');

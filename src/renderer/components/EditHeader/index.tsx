@@ -6,18 +6,19 @@ import taskStore from '@renderer/store/task';
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { ShowStatus, LiveStatus, ConfigBlockType } from '@renderer/type/task';
 import { checkFileName } from '@renderer/utils';
-import editSvg from '@renderer/common/images/edit/edit.svg';
+import { useInterval } from 'ahooks';
 import './index.less';
+import { getShowConfig } from '@renderer/services/task';
 
 const EditHeader = () => {
-  const navigate = useNavigate();
-
   const showStatus = taskStore.showStatus;
   const liveStatus = taskStore.liveStatus;
   const liveStreamUrl = taskStore.liveStreamUrl;
   const title = taskStore.title;
   const [edit, setEdit] = useState(false);
   const inputRef = useRef<InputRef>(null);
+
+  const navigate = useNavigate();
 
   const [inputVal, setInputVal] = useState(title);
 
@@ -35,22 +36,20 @@ const EditHeader = () => {
     }
   }, [liveStatus]);
 
-  // 是否可以推流
-  const canPush = useMemo(() => {
-    return showStatus === ShowStatus.Done && liveStatus === LiveStatus.NO_START;
-  }, [showStatus, liveStatus]);
-
   const handleBack = () => {
-    navigate(-1);
+    navigate('/app/home');
   };
 
   const handlePush = () => {
     // 切换到“问答配置”面板
     taskStore.setCurTab(ConfigBlockType.qa);
-    if (canPush) {
-      taskStore.startLive();
-    } else {
+
+    if (liveStreamUrl) {
       taskStore.stopLive();
+    }
+
+    if (!liveStreamUrl && showStatus === ShowStatus.Done) {
+      taskStore.startLive();
     }
   };
 
@@ -84,6 +83,26 @@ const EditHeader = () => {
     }
   }, [edit]);
 
+  useInterval(
+    async () => {
+      if (liveStatus === LiveStatus.NO_START) return;
+
+      const { module, code } = await getShowConfig({
+        showId: taskStore.showId,
+      });
+      if (code === 200) {
+        taskStore.setLiveStatus(module.liveStatus);
+        if (module.liveStatus === LiveStatus.Starting) {
+          taskStore.setLiveStreamUrl(module.liveStreamUrl);
+        }
+      }
+    },
+    3000,
+    {
+      immediate: true,
+    },
+  );
+
   return (
     <div className="edit-header-wrap">
       <div className="left">
@@ -100,11 +119,7 @@ const EditHeader = () => {
         ) : (
           <>
             <div className="view-text">{title}</div>
-            <img
-              src={editSvg}
-              className="edit-icon"
-              onClick={handleClickTitle}
-            ></img>
+            <div className="edit-icon" onClick={handleClickTitle}></div>
           </>
         )}
       </div>
@@ -121,10 +136,15 @@ const EditHeader = () => {
           className="btn push"
           type="primary"
           disabled={showStatus !== ShowStatus.Done}
-          danger={liveStatus === LiveStatus.Starting}
+          danger={!!liveStreamUrl}
+          loading={liveStatus === LiveStatus.StartGenerating}
           onClick={handlePush}
         >
-          {liveStatus === LiveStatus.NO_START ? '推流' : '停止'}
+          {liveStatus === LiveStatus.StartGenerating
+            ? '创建中'
+            : liveStreamUrl
+            ? '停止'
+            : '推流'}
         </Button>
         {liveStreamUrl && liveStatus === LiveStatus.Starting && (
           <div>推流地址：{liveStreamUrl}</div>

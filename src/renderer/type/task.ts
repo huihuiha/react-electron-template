@@ -102,6 +102,10 @@ export enum LiveStatus {
    * 推流中
    */
   Starting = 1,
+  /**
+   * 推流生成中
+   */
+  StartGenerating = 2,
 }
 
 /**

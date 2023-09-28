@@ -65,3 +65,10 @@ export const saveInteraction = (params: QaInfo) =>
 
 export const batchDeleteInteraction = (ids: number[]) =>
   requestPost(`${serverUrl}/api/v1/interaction/batchDelete`, ids);
+
+export const getShowConfig = (params: { showId: number }) => {
+  return requestGet<{
+    liveStatus: LiveStatus;
+    liveStreamUrl: string;
+  }>(`${serverUrl}/api/v1/show/getShowConfig`, params);
+};
