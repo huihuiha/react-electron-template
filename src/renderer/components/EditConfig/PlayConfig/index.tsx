@@ -21,9 +21,6 @@ const tip = `
 注意：需确保副本名称中含有 '_c_'，系统自动将该文件作为同名音频的副本
 `;
 
-// TODO: 0.1版本提示
-const tipV1 = `文件格式：序号_文件名称.文件类型`;
-
 const PlayConfig = () => {
   const { audioIdList, sortAudioList, playType } = sceneStore.curSceneData;
 
@@ -140,7 +137,7 @@ const PlayConfig = () => {
         overlayStyle={{
           whiteSpace: 'pre-line',
         }}
-        title={tipV1}
+        title={tip}
       >
         <div className="play-upload">
           <Upload
