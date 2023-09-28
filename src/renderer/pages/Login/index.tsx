@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './index.less';
 import LoginBlock from '@renderer/components/Login/LoginBlock/';
 

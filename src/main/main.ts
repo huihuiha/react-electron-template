@@ -21,7 +21,7 @@ app
         responseHeaders: {
           ...details.responseHeaders,
           'Content-Security-Policy':
-            "script-src 'self' https://static.geetest.com/static/js/gt.0.4.9.js *",
+            'script-src https://static.geetest.com/static/js/gt.0.4.9.js *',
         },
       });
     });

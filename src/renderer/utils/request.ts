@@ -67,6 +67,6 @@ export const requestPostFormData = async <T extends any>(
   return res.data;
 };
 
-export const serverUrl = '';
+export const serverUrl = 'https://vmlive-fat.test.seewo.com';
 
 export default service;
