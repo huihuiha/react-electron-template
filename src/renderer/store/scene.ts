@@ -29,13 +29,6 @@ class SceneStore {
 
   constructor() {
     makeAutoObservable(this);
-
-    reaction(
-      () => taskStore?.showId,
-      (showId) => {
-        this.showId = showId;
-      },
-    );
   }
 
   get curSceneData() {
@@ -46,7 +39,7 @@ class SceneStore {
     );
   }
 
-  init(sceneList: SceneInfo[]) {
+  init(sceneList: SceneInfo[], showId: number) {
     this.sceneList = sceneList.map((scene) => ({
       ...scene,
       sortAudioList: sortAudioList(scene.audioList),
@@ -54,6 +47,8 @@ class SceneStore {
 
     // 默认选中第一个场景
     this.curSceneId = sceneList[0]?.sceneId;
+
+    this.showId = showId;
   }
 
   setCurPlayType(playType: PlayType) {
