@@ -226,6 +226,14 @@ class SceneStore {
       return item;
     });
   }
+
+  reset() {
+    this.sceneList = [];
+
+    this.curSceneId = -1;
+
+    this.showId = 1;
+  }
 }
 
 export default new SceneStore();

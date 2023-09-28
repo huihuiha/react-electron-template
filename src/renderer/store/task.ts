@@ -317,6 +317,22 @@ class TaskStore {
       message.error('网络异常');
     }
   }
+
+  reset = () => {
+    this._debug_id = -1;
+    this.curTab = ConfigBlockType.playList;
+
+    this.showId = -1;
+    this.title = '';
+    this.liveRoomUrl = '';
+    this.livePlatform = undefined;
+    this.showStatus = ShowStatus.Draft;
+    this.liveStatus = LiveStatus.NO_START;
+    this.liveStreamUrl = '';
+
+    this.qaForm = DEFAULT_QA_FORM;
+    this.interactionList = [];
+  };
 }
 
 export default new TaskStore();
