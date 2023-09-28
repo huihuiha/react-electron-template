@@ -67,7 +67,18 @@ export const requestPostFormData = async <T extends any>(
   return res.data;
 };
 
-// TODO: 打包测试
-export const serverUrl = '';
+let serverUrl = '';
+
+if (process.env.NODE_ENV === 'development') {
+  serverUrl = '';
+} else if (process.env.API_ENV === 'DEV') {
+  serverUrl = 'https://vmlive.test.seewo.com';
+} else if (process.env.API_ENV === 'FAT') {
+  serverUrl = 'https://vmlive-fat.test.seewo.com';
+} else {
+  serverUrl = 'https://live.secoral.com';
+}
+
+export { serverUrl };
 
 export default service;

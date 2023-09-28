@@ -141,6 +141,7 @@ const configuration: webpack.Configuration = {
      */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      API_ENV: JSON.stringify(process.env.API_ENV)
     }),
 
     new webpack.LoaderOptionsPlugin({

@@ -109,6 +109,7 @@ const configuration: webpack.Configuration = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       DEBUG_PROD: false,
+      API_ENV: JSON.stringify(process.env.API_ENV)
     }),
 
     new MiniCssExtractPlugin({
