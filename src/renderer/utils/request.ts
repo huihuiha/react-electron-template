@@ -30,12 +30,12 @@ service.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 export const requestGet = async <T extends any>(
   api: string,
-  params?: Object,
+  params?: Object
 ): Promise<RespData<T>> => {
   const res = await service.get(api, {
     params: params || {},
@@ -46,7 +46,7 @@ export const requestGet = async <T extends any>(
 export const requestPost = async <T extends any>(
   api: string,
   params?: Object,
-  config: Record<string, any> = {},
+  config: Record<string, any> = {}
 ): Promise<RespData<T>> => {
   const res = await service.post(api, params, {
     headers: config.headers || {},
@@ -57,7 +57,7 @@ export const requestPost = async <T extends any>(
 // 上传文件专用
 export const requestPostFormData = async <T extends any>(
   api: string,
-  formData: FormData,
+  formData: FormData
 ): Promise<RespData<T>> => {
   const res = await service.post(api, formData, {
     headers: {
@@ -72,11 +72,11 @@ let serverUrl = '';
 if (process.env.NODE_ENV === 'development') {
   serverUrl = '';
 } else if (process.env.API_ENV === 'DEV') {
-  serverUrl = 'https://vmlive.test.seewo.com';
+  serverUrl = '';
 } else if (process.env.API_ENV === 'FAT') {
-  serverUrl = 'https://vmlive-fat.test.seewo.com';
+  serverUrl = '';
 } else {
-  serverUrl = 'https://live.secoral.com';
+  serverUrl = '';
 }
 
 export { serverUrl };
